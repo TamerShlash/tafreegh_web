@@ -1,0 +1,30 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+ar:
+  videos:
+    info: 'معلومات فيديو'
+    yt_id: 'رمز الفيديو'
+    title: 'العنوان'
+    description: 'الوصف'
+    snippet: 'معلومات أخرى'
+    auto_transcribed: 'مفرغ آالياً؟'
+    transcribed: 'مفرغ بشرياً؟'
+    auto_transcription: 'تفريغ آالي'
+    transcription: 'تفريغ بشري'
+    created_at: 'تاريخ الإنشاء'
+    updated_at: 'تاريخ التعديل'
+    preview: 'معاينة'
+    no_trans: 'لا يوجد'
+    download: 'تنزيل'
+    upload: 'رفع'
+    no_trans_upload_now: 'لا يوجد، ارفع الآن:'
+    new: 'إضافة فيديوهات'
+    all: 'كل الفيديوهات'
+    new_label: 'ضع روابط الفيديوهات كل على سطر (10 فيديوهات كحد أقصى)'
+    new_title: 'إضافة فيديوهات جديدة'
+    successfully_added: 'تمت إضافة الفيديوهات بنجاح!'
+    too_many_videos: 'عذراً، لا يمكن إضافة أكثر من 10 فيديوهات كحد أقصى في كل مرة.'
+    no_videos_given: 'لم تقم بإرسال روابط فيديوهات صالحة، الرجاء المحاولة مرة أخرى.'
+    an_error_occurred: 'حصل خطأ أثناء محاولة إضافة فيديوهات، الرجاء المحاولة مجدداً.'
+    invalid_video_url: 'بعض الروابط التي أضفتها غير صالحة، الرجاء التحقق من الروابط والمحاولة مجدداً.'

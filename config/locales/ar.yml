@@ -1,0 +1,7 @@
+ar:
+  hello: "أهلاً بالعالم"
+  time:
+    am: صباحًا
+    formats:
+      default: "%d/%m/%Y %H:%M:%S %z"
+    pm: مساءً

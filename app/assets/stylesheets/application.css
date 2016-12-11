@@ -1,0 +1,45 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body {
+  font-family: 'Droid Arabic Kufi', sans-serif;
+  padding-bottom: 20px;
+}
+
+.video-details {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  max-height: 150px;
+  overflow-y: scroll;
+}
+
+.dl-horizontal dt, .dl-horizontal dd {
+  vertical-align: middle;
+  line-height: 25px;
+  margin-bottom: 5px;
+}
+
+
+
+.numeric-date {
+  text-align: right;
+  direction: ltr;
+}
+
+.upload-input[type=file] {
+  max-width: 200px;
+  display: inline-block;
+}

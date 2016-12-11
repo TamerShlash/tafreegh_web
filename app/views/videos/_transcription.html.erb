@@ -1,0 +1,24 @@
+<% auto = false if local_assigns[:auto].nil? %>
+<% upload = false if local_assigns[:upload].nil? %>
+
+<% available = auto ? video.auto_transcribed? : video.transcribed %>
+<% if available %>
+  <% url = auto ? video.auto_transcription : video.transcription %>
+  <a class="btn btn-default btn-sm" href=<%= url %> >
+    <%= t('videos.download') %>
+    <i class="fa fa-download" aria-hidden="true"></i>
+  </a>
+<% elsif auto || !upload %>
+  <%= t('videos.no_trans') %>
+<% elsif !auto && upload %>
+  <%= form_for video, :html => { :class => "form-inline" } do |f| %>
+    <div class="form-group">
+      <%= t('videos.no_trans_upload_now') %>
+      <%= f.file_field :transcription_file, :class => 'btn btn-default upload-input' %>
+    </div>
+    <%= f.button :class => 'btn btn-primary' do %>
+      <%= t('videos.upload') %>
+      <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+    <% end %>
+  <% end %>
+<% end %>

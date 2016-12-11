@@ -1,0 +1,26 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+ar:
+  breadcrumbs:
+    application:
+      root: "الرئيسية"
+    pages:
+      pages: "حصفات"
+  helpers:
+    actions: "خيارات"
+    links:
+      back: "رجوع"
+      back_to_main: "الرجوع إلى الرئيسية"
+      cancel: "إلغاء"
+      confirm: "هل أنت متأ:د؟"
+      destroy: "حذف"
+      new: "إضافة"
+      edit: "تعديل"
+      details: 'تفاصيل'
+      save: 'حفظ'
+    titles:
+      edit: "تعديل %{model}"
+      save: "حفظ %{model}"
+      new: "إضافة %{model}"
+      delete: "حذف %{model}"

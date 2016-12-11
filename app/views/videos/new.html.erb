@@ -1,0 +1,23 @@
+<div class="page-header">
+  <h1><%= t('videos.new_title') %></h1>
+</div>
+
+<%= form_tag videos_path, :class => "form-horizontal video" do %>
+  <div class="form-group">
+    <div class="col-lg-10">
+      <%= label_tag :yt_urls, t('videos.new_label') + ':', :class => 'control-label' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-10">
+      <%= text_area_tag :yt_urls, @yt_urls, :class => 'form-control', placeholder: batch_textare_placeholder, rows: 12 %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-10">
+      <%= submit_tag t('helpers.links.save'), :class => 'btn btn-primary' %>
+      <%= link_to t('helpers.links.cancel'), videos_path, :class => 'btn btn-default' %>
+                
+    </div>
+  </div>
+<% end %>

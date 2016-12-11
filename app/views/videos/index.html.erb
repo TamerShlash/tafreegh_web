@@ -1,0 +1,35 @@
+<div class="page-header">
+  <h1><%= t('videos.all') %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t('videos.yt_id') %></th>
+      <th><%= t('videos.title') %></th>
+      <th><%= t('videos.auto_transcription') %></th>
+      <th><%= t('videos.transcription') %></th>
+      <th><%= t('videos.updated_at') %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @videos.each do |video| %>
+      <tr>
+        <td><%= link_to video.yt_id, video_path(video) %></td>
+        <td><%= video.title %></td>
+        <td>
+          <%= render partial: 'transcription', locals: { video: video, auto: true } %>
+        </td>
+        <td>
+          <%= render partial: 'transcription', locals: { video: video } %>
+        </td>
+        <td class="numeric-date"><%= l(video.updated_at, format: :default) %></td>
+        <td>
+          <%= link_to t('helpers.links.details'), video_path(video), :class => 'btn btn-default btn-sm' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('videos.new'), new_video_path, :class => 'btn btn-primary' %>

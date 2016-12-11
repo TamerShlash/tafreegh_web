@@ -1,0 +1,57 @@
+<div class="page-header">
+  <h1>
+    <%= t('videos.info') %>
+  </h1>
+</div>
+
+<dl class="dl-horizontal">
+  <div class="video-detail">
+    <dt><strong><%= t('videos.yt_id') %>:</strong></dt>
+    <dd><%= @video.yt_id %></dd>
+  </div>
+  <div class="video-detail">
+    <dt><strong><%= t('videos.title') %>:</strong></dt>
+    <dd><%= @video.title %></dd>
+  </div>
+  <div class="video-detail">
+    <dt><strong><%= t('videos.updated_at') %>:</strong></dt>
+    <dd class="numeric-date"><%= l(@video.updated_at, format: :default) %></dd>
+  </div>
+  <div class="video-detail">
+    <dt><strong><%= t('videos.auto_transcription') %>:</strong></dt>
+    <dd><%= render partial: 'transcription', locals: { video: @video, auto: true } %></dd>
+  </div>
+  <div class="video-detail">
+    <dt><strong><%= t('videos.transcription') %>:</strong></dt>
+    <dd><%= render partial: 'transcription', locals: { video: @video, upload: true } %></dd>
+  </div>
+  <div class="video-detail">
+    <dt><strong><%= t('videos.description') %>:</strong></dt>
+    <dd>
+      <div class="well video-details"><%= @video.description %></div>
+    </dd>
+  </div>
+  <div class="video-detail">
+    <dt><strong><%= t('videos.snippet') %>:</strong></dt>
+    <dd>
+      <div class="well video-details"><%= JSON.pretty_generate(JSON.parse(@video.snippet)).strip %></div>
+    </dd>
+  </div>
+  <div class="video-detail">
+    <dt><strong><%= t('videos.preview') %></strong></dt>
+    <dd>
+      <div class="col-lg-8">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= @video.yt_id %>" allowfullscreen></iframe>
+      </div>
+      </div>
+    </dd>
+  </div>
+</dl>
+<div class="text-center">
+  <hr />
+  <a class="btn btn-info btn-lg" href=<%= videos_path %> >
+    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+    <%= t('helpers.links.back_to_main') %>
+  </a>
+</div>
