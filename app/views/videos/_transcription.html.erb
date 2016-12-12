@@ -1,10 +1,10 @@
 <% auto = false if local_assigns[:auto].nil? %>
 <% upload = false if local_assigns[:upload].nil? %>
 
-<% available = auto ? video.auto_transcribed? : video.transcribed %>
+<% available = auto ? video.auto_transcribed? : video.transcribed? %>
 <% if available %>
   <% url = auto ? video.auto_transcription : video.transcription %>
-  <a class="btn btn-default btn-sm" href=<%= url %> >
+  <a class="btn btn-default btn-sm" href=<%= url %> target="_blank">
     <%= t('videos.download') %>
     <i class="fa fa-download" aria-hidden="true"></i>
   </a>
