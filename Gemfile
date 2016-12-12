@@ -9,6 +9,7 @@ gem 'pg', group: :production
 gem 'activerecord-import', '~> 0.15.0'
 
 gem 'google-api-client', '~> 0.9'
+gem 'aws-sdk', '~> 2'
 gem 'rails-i18n', '~> 5.0.0'
 
 # gem 'sass-rails', '~> 5.0'
