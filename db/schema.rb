@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20161210084857) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "videos", force: :cascade do |t|
     t.string   "yt_id",                              null: false
     t.string   "title"
@@ -23,9 +26,9 @@ ActiveRecord::Schema.define(version: 20161210084857) do
     t.text     "transcription"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.index ["auto_transcribed"], name: "index_videos_on_auto_transcribed"
-    t.index ["transcribed"], name: "index_videos_on_transcribed"
-    t.index ["yt_id"], name: "index_videos_on_yt_id", unique: true
+    t.index ["auto_transcribed"], name: "index_videos_on_auto_transcribed", using: :btree
+    t.index ["transcribed"], name: "index_videos_on_transcribed", using: :btree
+    t.index ["yt_id"], name: "index_videos_on_yt_id", unique: true, using: :btree
   end
 
 end
