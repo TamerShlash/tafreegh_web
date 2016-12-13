@@ -51,4 +51,9 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  ENV['AWS_PROFILE'] = 'tafreegh_s3_web'
+  ENV['AWS_REGION'] = 'us-west-2'
+  ENV['S3_BUCKET_NAME'] = 'tafreeghdev'
+  ENV['TAFREEGH_TOKEN'] = 'abcd'
 end
