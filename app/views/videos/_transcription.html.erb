@@ -11,7 +11,7 @@
 <% elsif auto || !upload %>
   <%= t('videos.no_trans') %>
 <% elsif !auto && upload %>
-  <%= form_for video, :html => { :class => "form-inline" } do |f| %>
+  <%= form_for video, url: { action: :transcription }, method: :post, :html => { :class => "form-inline" } do |f| %>
     <div class="form-group">
       <%= t('videos.no_trans_upload_now') %>
       <%= f.file_field :transcription_file, :class => 'btn btn-default upload-input' %>

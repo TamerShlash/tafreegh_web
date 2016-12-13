@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  before_action :set_video, only: [:show, :update]
+  before_action :set_video, only: [:show, :transcription]
   protect_from_forgery except: [:auto_transcription]
   before_action :verify_worker, only: :auto_transcription
 
@@ -34,15 +34,17 @@ class VideosController < ApplicationController
     creation_error
   end
 
-  # PATCH/PUT /videos/1
-  def update
-    if @video.update(video_params)
-      redirect_to @video, notice: 'Video was successfully updated.'
-    else
-      render :edit
-    end
+  # POST /videos/1/transcription
+  def transcription
+    transcription = params.require(:video).require(:transcription_file)
+    puts transcription
+    @video.save_transcription(transcription)
+    redirect_to @video, notice: t('videos.upload_succeeded')
+  rescue => e
+    redirect_to @video, alert: t('videos.upload_failed')
   end
 
+  # POST /videos/aPvbxuOBQ70/transcription
   def auto_transcription
     @video = Video.find_by!(yt_id: params[:id])
     auto_transcription = params.require(:auto_transcription_file)

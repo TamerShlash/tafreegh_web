@@ -27,7 +27,7 @@ class Video < ApplicationRecord
   def save_to_s3(uploaded_file, auto: false)
     S3_BUCKET.put_object(
       acl: 'public-read',
-      key: s3_object_key(auto: auto),
+      key: s3_object_key(uploaded_file, auto: auto),
       body: uploaded_file,
       content_language: 'ar',
       content_type: uploaded_file.content_type,
@@ -35,12 +35,20 @@ class Video < ApplicationRecord
     )
   end
 
-  def s3_object_key(auto: false)
-    "#{auto ? 'auto_transcription' : 'transcription'}/#{s3_file_name}"
+  def s3_object_key(uploaded_file, auto: false)
+    extension = uploaded_file_extension(uploaded_file, auto: auto)
+    "#{auto ? 'auto_transcription' : 'transcription'}/#{friendly_title}#{extension}"
   end
 
-  def s3_file_name
-    "#{friendly_title}.txt"
+  def uploaded_file_extension(uploaded_file, auto: false)
+    name_slices = uploaded_file.original_filename.split('.')
+    if name_slices.length > 1
+      ".#{name_slices.last}"
+    elsif auto
+      '.txt'
+    else
+      ''
+    end
   end
 
   def friendly_title

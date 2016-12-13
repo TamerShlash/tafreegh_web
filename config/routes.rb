@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   root to: 'videos#index'
-  resources :videos, except: [:edit, :destroy] do
+  resources :videos, except: [:edit, :update, :destroy] do
     member do
       post 'auto_transcription'
+      post 'transcription'
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
