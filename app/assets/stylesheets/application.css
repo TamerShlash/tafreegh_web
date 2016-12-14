@@ -32,8 +32,6 @@ body {
   margin-bottom: 5px;
 }
 
-
-
 .numeric-date {
   text-align: right;
   direction: ltr;
@@ -42,4 +40,12 @@ body {
 .upload-input[type=file] {
   max-width: 200px;
   display: inline-block;
+}
+
+.login-page {
+  top: 50px;
+}
+
+.login-page h1 {
+  margin-bottom: 30px;
 }

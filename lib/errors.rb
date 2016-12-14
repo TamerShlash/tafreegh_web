@@ -12,5 +12,5 @@ module Errors
   TooManyVideosError = Class.new Error
   NoVideosGivenError = Class.new Error
   InvalidVideoUrlError = Class.new Error
-  InvalidTafreeghTokenError = Class.new Error
+  AuthenticationError = Class.new Error
 end

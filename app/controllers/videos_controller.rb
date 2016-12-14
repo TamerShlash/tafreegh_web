@@ -1,7 +1,6 @@
 class VideosController < ApplicationController
   before_action :set_video, only: [:show, :transcription]
   protect_from_forgery except: [:auto_transcription]
-  before_action :verify_worker, only: :auto_transcription
 
   # GET /videos
   def index
@@ -49,8 +48,9 @@ class VideosController < ApplicationController
     auto_transcription = params.require(:auto_transcription_file)
     @video.save_auto_transcription(auto_transcription)
     render json: { success: true }
+  rescue AuthenticationError
+    render json: { success: false }, status: 401
   rescue => e
-    puts e
     render json: { success: false }, status: 400
   end
 
@@ -60,12 +60,6 @@ class VideosController < ApplicationController
   end
 
   private
-
-
-  def verify_worker
-    return if request.headers['Tafreegh-Token'] == ENV.fetch('TAFREEGH_TOKEN')
-    raise InvalidTafreeghTokenError
-  end
 
   def creation_error
     @yt_urls = params[:yt_urls]

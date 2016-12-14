@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   root to: 'videos#index'
 
   [
@@ -15,5 +17,9 @@ Rails.application.routes.draw do
       post 'transcription'
     end
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+  match 'auth/failure', to: redirect('/'), via: [:get, :post]
+  delete 'signout', to: 'sessions#destroy', as: 'logout'
+  get '/login', to: 'sessions#new'
 end
