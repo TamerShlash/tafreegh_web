@@ -5,7 +5,7 @@ class VideosController < ApplicationController
 
   # GET /videos
   def index
-    @videos = Video.slim.all
+    @videos = Video.everything
   end
 
   # GET /videos/1
@@ -37,7 +37,6 @@ class VideosController < ApplicationController
   # POST /videos/1/transcription
   def transcription
     transcription = params.require(:video).require(:transcription_file)
-    puts transcription
     @video.save_transcription(transcription)
     redirect_to @video, notice: t('videos.upload_succeeded')
   rescue => e
@@ -55,7 +54,13 @@ class VideosController < ApplicationController
     render json: { success: false }, status: 400
   end
 
+  def helpful_list
+    @videos = Video.public_send params[:list_name]
+    render :helpful_list
+  end
+
   private
+
 
   def verify_worker
     return if request.headers['Tafreegh-Token'] == ENV.fetch('TAFREEGH_TOKEN')

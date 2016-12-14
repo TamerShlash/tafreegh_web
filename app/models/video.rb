@@ -9,8 +9,17 @@ class Video < ApplicationRecord
       :auto_transcription,
       :transcription,
       :updated_at
-    ).all
+    )
   }
+
+  scope :latest_list, -> { slim.order(updated_at: :desc) }
+  scope :everything, -> { latest_list.all }
+  scope :transcribed, -> { latest_list.where(transcribed: true) }
+  scope :not_transcribed, -> { latest_list.where(transcribed: false) }
+  scope :auto_transcribed, -> { latest_list.where(auto_transcribed: true) }
+  scope :not_auto_transcribed, -> { latest_list.where(auto_transcribed: false) }
+  scope :transcribed_both, -> { transcribed.where(auto_transcribed: true) }
+  scope :transcribed_neither, -> { not_transcribed.where(auto_transcribed: false) }
 
   def save_auto_transcription(uploaded_file)
     s3_file = save_to_s3(uploaded_file, auto: true)

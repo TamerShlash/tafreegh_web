@@ -11,7 +11,7 @@ ar:
     actions: "خيارات"
     links:
       back: "رجوع"
-      back_to_main: "الرجوع إلى الرئيسية"
+      back_to_list: "الرجوع إلى القائمة"
       cancel: "إلغاء"
       confirm: "هل أنت متأ:د؟"
       destroy: "حذف"
