@@ -5,8 +5,6 @@ class SessionsController < ApplicationController
   end
 
   def create
-    puts fbid_whitelist
-    puts request.env['omniauth.auth']
     unless fbid_whitelist.include? request.env['omniauth.auth'].info.name
       redirect_to login_path, alert: t('users.not_whitelisted')
       return
