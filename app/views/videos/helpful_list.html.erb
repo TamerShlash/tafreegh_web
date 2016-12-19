@@ -1,2 +1,2 @@
-<% content_for :title, t("videos.lists.#{params[:list_name]}") %>
+<% content_for :title, t('videos.plural_the') + ' ' + t("videos.lists.#{params[:list_name]}") %>
 <%= render partial: 'list', locals: { video_list: @videos } %>

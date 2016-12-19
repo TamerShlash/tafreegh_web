@@ -26,6 +26,6 @@ class YoutubeFetcher
                 description: rv.snippet.description,
                 snippet: rv.snippet.as_json.slice(*SNIPPET_FIELDS).to_json)
     end
-    Video.import videos
+    Video.import! videos
   end
 end

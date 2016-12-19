@@ -13,4 +13,6 @@ module Errors
   NoVideosGivenError = Class.new Error
   InvalidVideoUrlError = Class.new Error
   AuthenticationError = Class.new Error
+  AuthorizationError = Class.new Error
+  UnapprovedUserError = Class.new Error
 end

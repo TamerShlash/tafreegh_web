@@ -19,4 +19,12 @@ module VideosHelper
       t('videos.lists.transcribed_neither') => transcribed_neither_videos_path
     }
   end
+
+  def uploadable?(video)
+    @current_user.admin? || video.user == @current_user
+  end
+
+  def assignable?(video)
+    video.user.blank? && current_user.can_assign?
+  end
 end

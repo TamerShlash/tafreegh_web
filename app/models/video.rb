@@ -1,4 +1,6 @@
 class Video < ApplicationRecord
+  belongs_to :user, optional: true
+
   scope :slim, lambda {
     select(
       :id,
@@ -8,8 +10,9 @@ class Video < ApplicationRecord
       :transcribed,
       :auto_transcription,
       :transcription,
-      :updated_at
-    )
+      :updated_at,
+      :user_id
+    ).includes(:user)
   }
 
   scope :latest_list, -> { slim.order(updated_at: :desc) }
@@ -20,6 +23,7 @@ class Video < ApplicationRecord
   scope :not_auto_transcribed, -> { latest_list.where(auto_transcribed: false) }
   scope :transcribed_both, -> { transcribed.where(auto_transcribed: true) }
   scope :transcribed_neither, -> { not_transcribed.where(auto_transcribed: false) }
+  scope :need_transcription, -> { not_transcribed.where(user_id: nil) }
 
   def save_auto_transcription(uploaded_file)
     s3_file = save_to_s3(uploaded_file, auto: true)

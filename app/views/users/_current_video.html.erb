@@ -1,0 +1,41 @@
+<% video = current_user.current_video %>
+
+<div class="text-center">
+  <h3><%= t('users.currently_transcribing') %></h3>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <dl class="dl-horizontal">
+      <div class="video-detail">
+        <dt><strong><%= t('videos.link') %>:</strong></dt>
+        <dd><%= link_to video.yt_id, "https://youtube.com/watch?v=#{video.yt_id}", target: '_blank' %></dd>
+      </div>
+      <div class="video-detail">
+        <dt><strong><%= t('videos.title') %>:</strong></dt>
+        <dd><%= video.title %></dd>
+      </div>
+      <div class="video-detail">
+        <dt><strong><%= t('videos.auto_transcription') %>:</strong></dt>
+        <dd><%= render partial: 'videos/auto_transcription', locals: { video: video } %></dd>
+      </div>
+    </dl>
+    <div class="text-center upload-now-box">
+      <p>هل انتهيت من التفريغ اليدوي؟ قم برفعه الآن:</p>
+      <%= form_for video, url: transcription_video_path(video), method: :post, :html => { :class => "form-inline" } do |f| %>
+        <div class="form-group">
+          <%= f.file_field :transcription_file, :class => 'btn btn-default upload-input' %>
+        </div>
+        <%= f.button :class => 'btn btn-primary' do %>
+          <%= t('videos.upload') %>
+          <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="embed-responsive embed-responsive-16by9">
+      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= video.yt_id %>" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>

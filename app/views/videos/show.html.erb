@@ -6,8 +6,8 @@
 
 <dl class="dl-horizontal">
   <div class="video-detail">
-    <dt><strong><%= t('videos.yt_id') %>:</strong></dt>
-    <dd><%= @video.yt_id %></dd>
+    <dt><strong><%= t('videos.link') %>:</strong></dt>
+    <dd><%= link_to @video.yt_id, "https://youtube.com/watch?v=#{@video.yt_id}", target: '_blank' %></dd>
   </div>
   <div class="video-detail">
     <dt><strong><%= t('videos.title') %>:</strong></dt>
@@ -18,12 +18,22 @@
     <dd class="numeric-date"><%= l(@video.updated_at, format: :default) %></dd>
   </div>
   <div class="video-detail">
+    <dt><strong><%= t('videos.assignee') %>:</strong></dt>
+    <dd>
+      <% if assignable?(@video) %>
+        <%= render partial: 'assign_button', locals: { video: @video } %>
+      <% else %>
+        <%= @video.user.name %>
+      <% end %>
+    </dd>
+  </div>
+  <div class="video-detail">
     <dt><strong><%= t('videos.auto_transcription') %>:</strong></dt>
-    <dd><%= render partial: 'transcription', locals: { video: @video, auto: true } %></dd>
+    <dd><%= render partial: 'auto_transcription', locals: { video: @video } %></dd>
   </div>
   <div class="video-detail">
     <dt><strong><%= t('videos.transcription') %>:</strong></dt>
-    <dd><%= render partial: 'transcription', locals: { video: @video, upload: true } %></dd>
+    <dd><%= render partial: 'transcription', locals: { video: @video } %></dd>
   </div>
   <div class="video-detail">
     <dt><strong><%= t('videos.description') %>:</strong></dt>
@@ -38,7 +48,7 @@
     </dd>
   </div>
   <div class="video-detail">
-    <dt><strong><%= t('videos.preview') %></strong></dt>
+    <dt><strong><%= t('videos.preview') %>:</strong></dt>
     <dd>
       <div class="col-lg-8">
       <div class="embed-responsive embed-responsive-16by9">

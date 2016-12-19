@@ -1,0 +1,30 @@
+<% content_for :title, t('videos.plural_the') + ' ' + t("videos.lists.need_transcription") %>
+
+<div class="page-header">
+  <h1><%= "#{yield(:title)} (#{@videos.size})" %></h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t('videos.yt_id') %></th>
+      <th><%= t('videos.title') %></th>
+      <th><%= t('videos.auto_transcription') %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @videos.each do |video| %>
+      <tr>
+        <td><%= link_to video.yt_id, video_path(video) %></td>
+        <td><%= video.title %></td>
+        <td>
+          <%= render partial: 'auto_transcription', locals: { video: video } %>
+        </td>
+        <td>
+          <%= link_to t('videos.details_or_assign'), video_path(video), :class => 'btn btn-default btn-sm' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

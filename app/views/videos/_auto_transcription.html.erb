@@ -1,0 +1,8 @@
+<% if video.auto_transcribed? %>
+  <a class="btn btn-default btn-sm" href=<%= video.auto_transcription %> target="_blank">
+    <%= t('videos.download') %>
+    <i class="fa fa-download" aria-hidden="true"></i>
+  </a>
+<% else %>
+  <%= t('videos.no_trans') %>
+<% end %>

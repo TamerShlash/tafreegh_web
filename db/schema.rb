@@ -10,19 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161214013153) do
+ActiveRecord::Schema.define(version: 20161218155258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "users", force: :cascade do |t|
-    t.string   "fbid",             null: false
+    t.string   "fbid",                             null: false
     t.string   "name"
     t.string   "email"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "admin",            default: false
+    t.boolean  "approved",         default: true
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["fbid"], name: "index_users_on_fbid", unique: true, using: :btree
   end
@@ -38,8 +40,11 @@ ActiveRecord::Schema.define(version: 20161214013153) do
     t.text     "transcription"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.integer  "user_id"
+    t.datetime "assigned_at"
     t.index ["auto_transcribed"], name: "index_videos_on_auto_transcribed", using: :btree
     t.index ["transcribed"], name: "index_videos_on_transcribed", using: :btree
+    t.index ["user_id"], name: "index_videos_on_user_id", using: :btree
     t.index ["yt_id"], name: "index_videos_on_yt_id", unique: true, using: :btree
   end
 

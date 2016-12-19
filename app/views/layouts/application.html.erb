@@ -37,7 +37,9 @@
     <![endif]-->
   </head>
   <body>
-    <%= render partial: 'layouts/navbar' if logged_in? %>
+    <% if logged_in? %>
+      <%= render partial: current_user.admin? ? 'layouts/admin_navbar' : 'layouts/user_navbar' %>
+    <% end %>
     <div class="container">
       <div class="row">
         <div class="col-lg-12">

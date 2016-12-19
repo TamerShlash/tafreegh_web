@@ -1,0 +1,31 @@
+<% content_for :title, t('videos.plural_the') + ' ' + t('users.my_transcriptions') %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="jumbotron current-video">
+      <% if current_user.current_video.present? %>
+        <%= render partial: 'users/current_video' %>
+      <% elsif current_user.approved? %>
+        <div class="text-center">
+          <p><%= t('users.no_current_transcription') %></p>
+          <p>
+            <a class="btn btn-lg btn-primary" href=<%= need_transcription_videos_path %>>
+              <%= t('users.start_new_transcription') %>
+            </a>
+          </p>
+        </div>
+      <% else %>
+        <div class="text-center">
+          <%= t('users.pending_approval') %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <%= render partial: 'videos/list', locals: { video_list: current_user.completed_videos } %>
+  </div>
+</div>
+

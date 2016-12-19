@@ -10,4 +10,12 @@ module ApplicationHelper
   def logged_in?
     @current_user || false
   end
+
+  def admin?
+    @current_user.admin? || false
+  end
+
+  def approved?
+    @current_user.approved? || false
+  end
 end

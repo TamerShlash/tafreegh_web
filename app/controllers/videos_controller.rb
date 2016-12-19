@@ -1,5 +1,8 @@
 class VideosController < ApplicationController
-  before_action :set_video, only: [:show, :transcription]
+  include VideosHelper
+
+  before_action :set_video, only: [:show, :assign, :transcription]
+  before_action :authorize!, except: [:auto_transcription, :transcription, :need_transcription, :show, :assign]
   protect_from_forgery except: [:auto_transcription]
 
   # GET /videos
@@ -9,6 +12,9 @@ class VideosController < ApplicationController
 
   # GET /videos/1
   def show
+    unless uploadable?(@video) || assignable?(@video)
+      raise Errors::AuthorizationError
+    end
   end
 
   # GET /videos/new
@@ -35,11 +41,13 @@ class VideosController < ApplicationController
 
   # POST /videos/1/transcription
   def transcription
+    raise Errors::AuthorizationError unless uploadable?(@video)
+    redirect_path = current_user.admin? ? @video : dashboard_path
     transcription = params.require(:video).require(:transcription_file)
     @video.save_transcription(transcription)
-    redirect_to @video, notice: t('videos.upload_succeeded')
+    redirect_to redirect_path, notice: t('videos.upload_succeeded')
   rescue => e
-    redirect_to @video, alert: t('videos.upload_failed')
+    redirect_to redirect_path, alert: t('videos.upload_failed')
   end
 
   # POST /videos/aPvbxuOBQ70/transcription
@@ -54,9 +62,31 @@ class VideosController < ApplicationController
     render json: { success: false }, status: 400
   end
 
+  def assign
+    if assignable?(@video)
+      current_user.videos << @video
+      if current_user.save!
+        redirect_to dashboard_path, notice: t('users.assigned_successfully')
+      else
+        redirect_to dashboard_path, alert: t('users.failed_to_assign')
+      end
+    else
+      raise Errors::AuthorizationError
+    end
+  end
+
   def helpful_list
     @videos = Video.public_send params[:list_name]
     render :helpful_list
+  end
+
+  def need_transcription
+    @videos = Video.need_transcription
+  end
+
+  def authorize!
+    return if current_user.admin?
+    raise Errors::AuthorizationError
   end
 
   private

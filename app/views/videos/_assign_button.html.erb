@@ -1,0 +1,6 @@
+<%= form_for video, url: assign_video_path(video), method: :post, :html => { :class => "form-inline" } do |f| %>
+  <%= t('videos.no_assignee') %>
+  <%= f.button :class => 'btn btn-primary btn-sm', data: {:confirm => t('videos.confirm_assignment') } do %>
+    <%= t('videos.assign_to_me') %>
+  <% end %>
+<% end %>
