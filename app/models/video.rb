@@ -25,6 +25,7 @@ class Video < ApplicationRecord
   scope :transcribed_neither, -> { not_transcribed.where(auto_transcribed: false) }
 
   scope :need_transcription, -> { slim.where(transcribed: false, user_id: nil).order(:id) }
+  scope :pending_transcription, -> { slim.includes(:user).where(transcribed: false).where.not(user_id: nil) }
 
   def save_auto_transcription(uploaded_file)
     s3_file = save_to_s3(uploaded_file, auto: true)

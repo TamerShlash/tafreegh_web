@@ -12,28 +12,44 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <% helpful_list_links.each do |text, target| %>
-          <li class=<%= (text == yield(:title)) ? 'active' : '' %>><%= link_to text, target %></li>
-        <% end %>
-      </ul>
-      <ul class="nav navbar-nav navbar-left">
-        <%= link_to t('videos.new'), new_video_path, :class => 'btn btn-primary navbar-btn navbar-right' %>
+        <li class=<%= active_link?(videos_path) %>><%= link_to t('videos.lists.all'), videos_path %></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">خيارات المدير <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <%= t('videos.lists.helpful_lists') + ' ' %>
+            <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
-            <li class=<%= (current_page? dashboard_path) ? 'active' : '' %>>
-              <%= link_to t('users.dashboard'), dashboard_path %>
-            </li>
-            <li class="disabled"><a href="#"><%= t('users.manage_users') %></a></li>
-            <li role="separator" class="divider"></li>
-            <li>
-              <%= link_to logout_path, method: :delete do %>
-                <%= t('users.logout') %>
-                <i class="fa fa-sign-out fa-rotate-180" aria-hidden="true"></i>
-              <% end %>
-            </li>
+            <% helpful_list_links.each do |text, target| %>
+              <li class=<%= active_link?(target) %>><%= link_to text, target %></li>
+            <% end %>
           </ul>
         </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <%= t('users.admin_tools') + ' ' %>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class=<%= active_link?(need_transcription_videos_path) %>>
+              <%= link_to t('videos.transcription_needed'), need_transcription_videos_path %>
+            </li>
+            <li class=<%= active_link?(pending_transcription_videos_path) %>>
+              <%= link_to t('videos.lists.pending_transcription'), pending_transcription_videos_path %>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li class="disabled"><a href="#"><%= t('users.manage_users') %></a></li>
+          </ul>
+        </li>
+        <%= link_to t('videos.new'), new_video_path, :class => 'btn btn-primary navbar-btn' %>
+      </ul>
+      <ul class="nav navbar-nav navbar-left">
+        <li class=<%= active_link?(dashboard_path) %>>
+          <%= link_to t('users.dashboard'), dashboard_path %>
+        </li>
+        <%= link_to logout_path, method: :delete, class: 'btn btn-default navbar-btn' do %>
+          <%= t('users.logout') %>
+          <i class="fa fa-sign-out fa-rotate-180" aria-hidden="true"></i>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div>

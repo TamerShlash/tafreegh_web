@@ -18,3 +18,4 @@ ar:
     failed_to_assign: 'حدث خطأ أثناء استلام الفيديو، يرجى إعادة المحاولة.'
     currently_transcribing: 'أنت تقوم الآن بتفريغ الفيديو التالي:'
     manage_users: 'إدارة الأعضاء'
+    admin_tools: 'أدوات الإدارة'

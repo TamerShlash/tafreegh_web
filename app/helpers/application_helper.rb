@@ -18,4 +18,8 @@ module ApplicationHelper
   def approved?
     @current_user.approved? || false
   end
+
+  def active_link?(link)
+    current_page?(link) ? 'active' : ''
+  end
 end

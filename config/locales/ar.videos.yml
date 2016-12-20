@@ -37,9 +37,11 @@ ar:
     assignee_none: 'لا يوجد'
     no_assignee: 'لا يوجد متطوع'
     empty_list: 'لا يوجد فيديوهات.'
+    transcription_needed: 'بحاجة لتفريغ'
     confirm_assignment: 'ستصبح مسؤلاً عن تفريغ هذا الفيديو، ويفضل إتمامه بأقرب وقت ممكن. اتفقنا؟'
     lists:
-        all: 'الكل'
+        helpful_lists: 'قوائم مفيدة'
+        all: 'كل الفيديوهات'
         transcribed: 'المفرغة يدوياً'
         not_transcribed: 'غير المفرغة يدوياً'
         auto_transcribed: 'المفرغة آلياً'
@@ -47,3 +49,4 @@ ar:
         transcribed_both: 'المفرغة آلياً ويدوياً'
         transcribed_neither: 'غير المفرغة'
         need_transcription: 'التي تحتاج لتفريغ يدوي'
+        pending_transcription: 'قيد التفريغ'

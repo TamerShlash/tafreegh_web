@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   [
     'transcribed', 'not_transcribed',
     'auto_transcribed', 'not_auto_transcribed',
-    'transcribed_both', 'transcribed_neither'
+    'transcribed_both', 'transcribed_neither',
+    'pending_transcription'
   ].each do |list_name|
     get "/#{list_name}", to: 'videos#helpful_list', list_name: list_name, as: "#{list_name}_videos"
   end

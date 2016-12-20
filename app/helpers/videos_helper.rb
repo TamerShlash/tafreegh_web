@@ -10,7 +10,6 @@ module VideosHelper
 
   def helpful_list_links
     {
-      t('videos.lists.all') => videos_path,
       t('videos.lists.transcribed') => transcribed_videos_path,
       t('videos.lists.not_transcribed') => not_transcribed_videos_path,
       t('videos.lists.auto_transcribed') => auto_transcribed_videos_path,
