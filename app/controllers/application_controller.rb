@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def unauthorized
-    redirect_to dashboard_path, alert: t('uesrs.unauthorized')
+    redirect_to dashboard_path, alert: t('users.unauthorized')
   end
 
   protected
