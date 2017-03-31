@@ -12,7 +12,7 @@ gem 'google-api-client', '~> 0.9'
 gem 'aws-sdk', '~> 2'
 gem 'rails-i18n', '~> 5.0.0'
 
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
